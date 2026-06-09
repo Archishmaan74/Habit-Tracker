@@ -11,6 +11,9 @@ function HabitList() {
           <Grid container sx={{ alignItems: "center" }}>
             <Grid>
               <Typography variant="h6">{habits.name}</Typography>
+              <Typography variant="body2" sx={{ textTransform: "capitalize" }}>
+                {habits.frequency}
+              </Typography>
             </Grid>
           </Grid>
         </Paper>
