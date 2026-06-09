@@ -2,6 +2,7 @@ import { Provider } from "react-redux";
 import store from "./app/store";
 import { Container, Typography } from "@mui/material";
 import AddHabitForm from "./components/AddHabitForm";
+import HabitList from "./components/HabitList";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
           Habit Tracker
         </Typography>
         <AddHabitForm />
+        <HabitList />
       </Container>
     </Provider>
   );
