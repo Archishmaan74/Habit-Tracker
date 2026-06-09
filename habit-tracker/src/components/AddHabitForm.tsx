@@ -7,14 +7,28 @@ import {
   Select,
   TextField,
 } from "@mui/material";
-import { useState } from "react";
+import { useState, type SubmitEvent } from "react";
+import { useDispatch } from "react-redux";
+import type { AppDispatch } from "../app/store";
+import { addHabits } from "../app/habit-slice";
 
 function AddHabitForm() {
   const [name, setName] = useState<string>("");
   const [frequency, setFrequency] = useState<"daily" | "weekly">("daily");
+  const dispatch = useDispatch<AppDispatch>();
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (name.trim()) {
+      dispatch(
+        addHabits({
+          name,
+          frequency,
+        }),
+      );
+      setName("");
+    }
   };
 
   return (
