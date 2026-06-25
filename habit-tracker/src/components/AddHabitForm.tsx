@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   FormControl,
   InputLabel,
@@ -11,6 +10,7 @@ import { useState, type SubmitEvent } from "react";
 import { useDispatch } from "react-redux";
 import type { AppDispatch } from "../app/store";
 import { addHabits } from "../app/habit-slice";
+import StyledAddHabitForm from "./AddHabitFormStyles";
 
 function AddHabitForm() {
   const [name, setName] = useState<string>("");
@@ -33,13 +33,7 @@ function AddHabitForm() {
 
   return (
     <form onSubmit={handleFormSubmit}>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          gap: 2,
-        }}
-      >
+      <StyledAddHabitForm>
         <TextField
           label="Habit Name"
           value={name}
@@ -47,6 +41,7 @@ function AddHabitForm() {
           placeholder="Enter habit name"
           fullWidth
         />
+
         <FormControl fullWidth>
           <InputLabel>Frequency:</InputLabel>
           <Select
@@ -57,10 +52,11 @@ function AddHabitForm() {
             <MenuItem value="weekly">Weekly</MenuItem>
           </Select>
         </FormControl>
+
         <Button type="submit" variant="contained" color="primary">
           Add Habit
         </Button>
-      </Box>
+      </StyledAddHabitForm>
     </form>
   );
 }

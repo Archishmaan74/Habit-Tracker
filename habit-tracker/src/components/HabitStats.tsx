@@ -2,7 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../app/store";
 import { useEffect } from "react";
 import { fetchHabits, type Habit } from "../app/habit-slice";
-import { Box, LinearProgress, Paper, Typography } from "@mui/material";
+import { LinearProgress, Typography } from "@mui/material";
+import StyledHabitStats from "./HabitStatsStyles";
 
 const HabitStats: React.FC = () => {
   const { habits, isLoading, error } = useSelector(
@@ -19,6 +20,7 @@ const HabitStats: React.FC = () => {
 
   const getCompletedToday = () => {
     const today = new Date().toISOString().split("T")[0];
+
     return habits.filter((habit) => habit.completedDates.includes(today))
       .length;
   };
@@ -30,6 +32,7 @@ const HabitStats: React.FC = () => {
 
       while (true) {
         const dateString = currentDate.toISOString().split("T")[0];
+
         if (habit.completedDates.includes(dateString)) {
           streak++;
           currentDate.setDate(currentDate.getDate() - 1);
@@ -53,22 +56,25 @@ const HabitStats: React.FC = () => {
   }
 
   return (
-    <Paper elevation={2} sx={{ p: 2, mt: 4 }}>
+    <StyledHabitStats elevation={2}>
       <Typography variant="h6" gutterBottom>
         Habit Statistics
       </Typography>
-      <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+
+      <div className="stats-container">
         <Typography variant="body1">
           Total Habits: {getTotalHabits()}
         </Typography>
+
         <Typography variant="body1">
           Completed Today: {getCompletedToday()}
         </Typography>
+
         <Typography variant="body1">
           Longest Streak: {getLongestStreak()} days
         </Typography>
-      </Box>
-    </Paper>
+      </div>
+    </StyledHabitStats>
   );
 };
 

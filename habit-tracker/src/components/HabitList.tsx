@@ -1,15 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../app/store";
-import {
-  Box,
-  Button,
-  Grid,
-  LinearProgress,
-  Paper,
-  Typography,
-} from "@mui/material";
+import { Button, Grid, LinearProgress, Paper, Typography } from "@mui/material";
 import { CheckCircle, Delete } from "@mui/icons-material";
 import { removeHabit, toggleHabit, type Habit } from "../app/habit-slice";
+import StyledHabitList from "./HabitListStyles";
 
 function HabitList() {
   const habitsList = useSelector((state: RootState) => state.habits.habits);
@@ -35,18 +29,20 @@ function HabitList() {
   };
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", gap: 2, mt: 4 }}>
+    <StyledHabitList>
       {habitsList.map((habit) => (
-        <Paper key={habit.id} elevation={2} sx={{ p: 2 }}>
-          <Grid container sx={{ alignItems: "center" }}>
+        <Paper key={habit.id} elevation={2} className="habit-card">
+          <Grid container className="habit-grid">
             <Grid size={{ xs: 12, sm: 6 }}>
               <Typography variant="h6">{habit.name}</Typography>
-              <Typography variant="body2" sx={{ textTransform: "capitalize" }}>
+
+              <Typography variant="body2" className="habit-frequency">
                 {habit.frequency}
               </Typography>
             </Grid>
+
             <Grid size={{ xs: 12, sm: 6 }}>
-              <Box sx={{ display: "flex", justifyContent: "flex-end", gap: 1 }}>
+              <div className="button-container">
                 <Button
                   variant="outlined"
                   color={
@@ -61,6 +57,7 @@ function HabitList() {
                     ? "Completed"
                     : "Mark Complete"}
                 </Button>
+
                 <Button
                   variant="outlined"
                   color="error"
@@ -69,10 +66,11 @@ function HabitList() {
                 >
                   Remove
                 </Button>
-              </Box>
+              </div>
             </Grid>
           </Grid>
-          <Box sx={{ mt: 2 }}>
+
+          <div className="progress-section">
             <Typography variant="body2">
               Current Streak: {getStreak(habit)} days
             </Typography>
@@ -80,12 +78,12 @@ function HabitList() {
             <LinearProgress
               variant="determinate"
               value={(getStreak(habit) / 30) * 100}
-              sx={{ mt: 1 }}
+              className="progress-bar"
             />
-          </Box>
+          </div>
         </Paper>
       ))}
-    </Box>
+    </StyledHabitList>
   );
 }
 
