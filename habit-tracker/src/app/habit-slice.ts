@@ -35,7 +35,7 @@ export const fetchHabits = createAsyncThunk<
         resolve([
           {
             id: "1",
-            name: "Read",
+            name: "Play Badminton",
             frequency: "daily",
             completedDates: [],
             createdAt: new Date().toISOString(),
