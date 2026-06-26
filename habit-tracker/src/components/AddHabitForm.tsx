@@ -43,8 +43,9 @@ function AddHabitForm() {
         />
 
         <FormControl fullWidth>
-          <InputLabel>Frequency:</InputLabel>
+          <InputLabel id="frequency-label">Frequency:</InputLabel>
           <Select
+            labelId="frequency-label"
             value={frequency}
             onChange={(e) => setFrequency(e.target.value as "daily" | "weekly")}
           >
