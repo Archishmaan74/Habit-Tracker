@@ -101,8 +101,33 @@ const habitSlice = createSlice({
     removeHabit: (state, action: PayloadAction<{ id: string }>) => {
       state.habits = state.habits.filter((h) => h.id !== action.payload.id);
     },
+
     resetHabits: (state) => {
       state.habits = [];
+      state.isLoading = false;
+      state.error = null;
+    },
+
+    setCompletedDates: (
+      state,
+      action: PayloadAction<{
+        id: string;
+        completedDates: string[];
+      }>,
+    ) => {
+      const habit = state.habits.find((h) => h.id === action.payload.id);
+
+      if (habit) {
+        habit.completedDates = action.payload.completedDates;
+      }
+    },
+
+    setLoading: (state, action: PayloadAction<boolean>) => {
+      state.isLoading = action.payload;
+    },
+
+    setError: (state, action: PayloadAction<string | null>) => {
+      state.error = action.payload;
     },
   },
 
@@ -123,7 +148,14 @@ const habitSlice = createSlice({
   },
 });
 
-export const { addHabits, toggleHabit, removeHabit, resetHabits } =
-  habitSlice.actions;
+export const {
+  addHabits,
+  toggleHabit,
+  removeHabit,
+  resetHabits,
+  setCompletedDates,
+  setLoading,
+  setError,
+} = habitSlice.actions;
 
 export default habitSlice.reducer;
