@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../app/store";
 import { Button, Grid, LinearProgress, Paper, Typography } from "@mui/material";
-import { CheckCircle, Delete } from "@mui/icons-material";
+import CheckCircle from "@mui/icons-material/CheckCircle";
+import Delete from "@mui/icons-material/Delete";
 import { removeHabit, toggleHabit, type Habit } from "../app/habit-slice";
 import StyledHabitList from "./HabitListStyles";
 
